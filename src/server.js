@@ -12,16 +12,15 @@ import { notFound, errorHandler } from './middleware/errorHandler.js'
 import connectDB from './config/db.js'
 
 dotenv.config()
-
 connectDB()
 
 const app = express()
 
-
 app.use(express.json())
+
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   })
 )
