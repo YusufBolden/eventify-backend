@@ -18,12 +18,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL?.trim(),
-    credentials: false,
-  })
-)
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.json('Welcome to Eventify')
