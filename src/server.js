@@ -7,6 +7,7 @@ import eventRoutes from './routes/eventRoutes.js'
 import guestRoutes from './routes/guestRoutes.js'
 import taskRoutes from './routes/taskRoutes.js'
 import settingsRoutes from './routes/settingsRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 
 import { notFound, errorHandler } from './middleware/errorHandler.js'
 import connectDB from './config/db.js'
@@ -29,6 +30,7 @@ app.use('/api/events', eventRoutes)
 app.use('/api/guests', guestRoutes)
 app.use('/api/tasks', taskRoutes)
 app.use('/api/settings', settingsRoutes)
+app.use('/api/upload', uploadRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
