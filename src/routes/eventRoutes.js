@@ -5,10 +5,13 @@ import {
   getEventById,
   updateEvent,
   deleteEvent,
+  getMyEvents
 } from '../controllers/eventController.js'
 import protect from '../middleware/authMiddleware.js'
 
 const router = express.Router()
+
+router.get('/my-events', protect, getMyEvents)
 
 router.route('/').post(protect, createEvent).get(protect, getEvents)
 router

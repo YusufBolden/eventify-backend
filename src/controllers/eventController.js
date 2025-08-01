@@ -26,6 +26,16 @@ export const getEvents = async (req, res) => {
   res.json(events)
 }
 
+// returns only the logged-in user's events
+export const getMyEvents = async (req, res) => {
+  try {
+    const events = await Event.find({ owner: req.user._id }).sort({ date: 1 })
+    res.json(events)
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' })
+  }
+}
+
 export const getEventById = async (req, res) => {
   const event = await Event.findOne({
     _id: req.params.id,
