@@ -7,10 +7,18 @@ const protect = async (req, res, next) => {
       req.headers.authorization &&
       req.headers.authorization.startsWith('Bearer')
     ) {
-      let token = req.headers.authorization.split(' ')[1]
-
+      const token = req.headers.authorization.split(' ')[1]
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
+      
       req.user = await User.findById(decoded.id).select('-password')
+
+      console.log("Auth Debug:", req.user?.email, "isAdmin:", req.user?.isAdmin)
+
+      if (!req.user) {
+        res.status(401)
+        throw new Error('Not authorized, user not found')
+      }
+
       next()
     } else {
       res.status(401)
