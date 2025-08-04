@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const eventSchema = new mongoose.Schema(
   {
@@ -19,7 +19,8 @@ const eventSchema = new mongoose.Schema(
     ],
   },
   { timestamps: true }
-)
+);
 
-const Event = mongoose.model('Event', eventSchema)
-export default Event
+const Event = mongoose.model('Event', eventSchema);
+
+export default Event;
