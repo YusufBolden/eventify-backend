@@ -26,10 +26,8 @@ export const getEvents = async (req, res) => {
       const { userId } = req.query;
       let query = {};
 
-      if (userId) {
-        if (!mongoose.Types.ObjectId.isValid(userId)) {
-          return res.status(400).json({ message: 'Invalid userId format' });
-        }
+      // If a specific userId is passed, validate and filter
+      if (userId && mongoose.Types.ObjectId.isValid(userId)) {
         query.owner = new mongoose.Types.ObjectId(userId);
         console.log(`getEvents Debug → Filtering events for userId: ${userId}`);
       }
@@ -38,6 +36,7 @@ export const getEvents = async (req, res) => {
       return res.json(events);
     }
 
+    // Non-admins get only their own events
     const myEvents = await Event.find({ owner: req.user._id });
     return res.json(myEvents);
   } catch (error) {

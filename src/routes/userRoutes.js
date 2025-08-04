@@ -1,4 +1,4 @@
-import express from 'express';
+import express from 'express'
 import {
   registerUser,
   loginUser,
@@ -6,22 +6,28 @@ import {
   updateUserProfile,
   getAllUsers,
   getUserById,
-} from '../controllers/userController.js';
-import protect from '../middleware/authMiddleware.js';
-import admin from '../middleware/adminMiddleware.js';
+  getUserEvents,
+  updateUserById,
+  deleteUserById
+} from '../controllers/userController.js'
+import protect from '../middleware/authMiddleware.js'
+import admin from '../middleware/adminMiddleware.js'
 
-const router = express.Router();
+const router = express.Router()
 
 // Public
-router.post('/register', registerUser);
-router.post('/login', loginUser);
+router.post('/register', registerUser)
+router.post('/login', loginUser)
 
 // Private (User/Admin)
-router.get('/profile', protect, getUserProfile);
-router.put('/profile', protect, updateUserProfile);
+router.get('/profile', protect, getUserProfile)
+router.put('/profile', protect, updateUserProfile)
 
 // Admin only
-router.get('/', protect, admin, getAllUsers);
-router.get('/:id', protect, admin, getUserById);
+router.get('/', protect, admin, getAllUsers)
+router.get('/:id/events', protect, admin, getUserEvents)
+router.get('/:id', protect, admin, getUserById)
+router.put('/:id', protect, admin, updateUserById)
+router.delete('/:id', protect, admin, deleteUserById)
 
-export default router;
+export default router
